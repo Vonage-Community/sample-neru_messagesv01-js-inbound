@@ -1,6 +1,8 @@
 import { neru, Messages } from 'neru-alpha';
+import express from 'express';
 
-const router = neru.Router();
+const app = express();
+const port = process.env.NERU_APP_PORT;
 
 const session = neru.createSession();
 const messages = new Messages(session);
@@ -21,7 +23,13 @@ await messages.listenEvents(
     'onEvent',
 ).execute();
 
-router.post('/onMessage', async (req, res) => {
+app.use(express.json());
+
+app.get('/_/health', async (req, res) => {
+    res.sendStatus(200);
+});
+
+app.post('/onMessage', async (req, res) => {
     const message = req.body.message.content.text;
     console.log(`Message received: ${message}`);
 
@@ -30,11 +38,13 @@ router.post('/onMessage', async (req, res) => {
     res.sendStatus(200);
 });
 
-router.post('/onEvent', async (req, res) => {
+app.post('/onEvent', async (req, res) => {
     const { status } = req.body;
     console.log(`message status is: ${status}`);
 
     res.sendStatus(200);
 });
 
-export { router };
+app.listen(port, () => {
+    console.log(`App listening on port ${port}`)
+});
