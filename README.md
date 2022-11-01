@@ -2,6 +2,12 @@
 
 This project shows how to use NeRu to receive and send SMS messages with the Messages API V0.1.
 
+## Receive Inbound SMS Webhooks
+
+To receive inbound SMS messages to your NeRu applications you will need to update your API Settings on the Vonage Dashboard to send inbound SMS webhooks to the Messages API:
+
+![API Settings SMS Webhook Toggle](sms-webhooks.png)
+
 ## Running the project
 
 To run the project after downloading/cloning, first install the dependencies:
@@ -34,7 +40,7 @@ instance:
     application-id: $YOUR_VONAGE_APPLICATION_ID
     entrypoint: [node, index.js]
     capabilities:
-        - messaging
+        - messages-v0.1
     environment:
         - name: VONAGE_NUMBER
           value: "$YOUR_VONAGE_NUMBER"
