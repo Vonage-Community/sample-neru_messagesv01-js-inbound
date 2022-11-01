@@ -55,8 +55,5 @@ Then start the project locally using:
 neru debug
 ```
 
-Go to [your application](https://dashboard.nexmo.com/applications) on the Vonage API Dashboard and set the right version of Messages API. For this app it should be v0.1:
-
-![dashboard messages setting](dashboard.png)
 
 Now you text the number linked to your application.
